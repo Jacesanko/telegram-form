@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +15,23 @@
     <iframe id="google-form"></iframe>
 
     <script>
-        // 1. Silently grab the user's Telegram data
-        const tgUser = window.Telegram.WebApp.initDataUnsafe.user;
-        const identifier = tgUser.username || tgUser.id; // Fallback to ID if they don't have a username
+        // Initialize the Telegram Web App
+        window.Telegram.WebApp.ready();
+
+        // 1. Safely grab the user's Telegram data (prevents crashes outside Telegram)
+        const tgData = window.Telegram.WebApp.initDataUnsafe || {};
+        const tgUser = tgData.user || {};
+        
+        // Fallback to ID, or 'Unknown' if tested outside Telegram
+        const identifier = tgUser.username || tgUser.id || "Unknown"; 
 
         // 2. Your Google Form Pre-filled Link base
-        // Replace 'entry.123456789' with your actual pre-filled field ID
         const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdTeDuykoY8ApKataWujWo4iUCG6yIFU18asMnIMpoBMm74fw/viewform";
-        const prefillTracker = "?usp=pp_url&entry.196978520" + identifier;
+        
+        // 3. The Tracker (Notice the added '=' sign)
+        const prefillTracker = "?usp=pp_url&entry.196978520=" + identifier;
 
-        // 3. Load the Google Form into the iframe with the tracker attached
+        // 4. Load the Google Form into the iframe
         document.getElementById("google-form").src = formBase + prefillTracker;
     </script>
 </body>
