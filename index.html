@@ -33,7 +33,7 @@
         const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdTeDuykoY8ApKataWujWo4iUCG6yIFU18asMnIMpoBMm74fw/viewform";
         
         // 3. The Tracker attached to your exact Entry ID
-        const prefillTracker = "?usp=pp_url&entry.196978520=" + identifier;
+        const prefillTracker = "?usp=pp_url&entry.196978520=" + identifier + "&pageHistory=0,1,2";
 
         // 4. Load the Google Form into the iframe
         document.getElementById("google-form").src = formBase + prefillTracker;
