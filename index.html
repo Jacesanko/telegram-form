@@ -6,13 +6,10 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff; }
         iframe { width: 100%; height: 100%; border: none; }
-        #debug { position: absolute; top: 10px; left: 10px; background: yellow; padding: 10px; z-index: 100; font-family: sans-serif; font-size: 14px;}
     </style>
 </head>
 <body>
 
-    <!-- Temporary Debug Box -->
-    <div id="debug">Waiting for Telegram data...</div>
     <iframe id="google-form"></iframe>
 
     <script>
@@ -26,9 +23,6 @@
         // Fallback to ID, or 'Unknown' if tested outside Telegram
         const identifier = tgUser.username || tgUser.id || "Unknown"; 
 
-        // Debugging: Show what we found on screen
-        document.getElementById("debug").innerText = "Found ID: " + identifier;
-
         // 2. Your Google Form Pre-filled Link base
         const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdTeDuykoY8ApKataWujWo4iUCG6yIFU18asMnIMpoBMm74fw/viewform";
         
@@ -37,11 +31,6 @@
 
         // 4. Load the Google Form into the iframe
         document.getElementById("google-form").src = formBase + prefillTracker;
-
-        // Remove the debug box after 2 seconds
-        setTimeout(() => {
-            document.getElementById("debug").style.display = "none";
-        }, 2000);
     </script>
 </body>
 </html>
